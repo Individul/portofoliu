@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>dumitru.cloud</title>
+  <meta name="description" content="Aplicațiile personale ale lui Dumitru, găzduite pe subdomeniile dumitru.cloud.">
+  <meta name="theme-color" content="#16121D">
+  <meta property="og:title" content="dumitru.cloud">
+  <meta property="og:description" content="Ce construiesc, la un click distanță.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dumitru.cloud/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap">
+  <style>
+    :root {
+      --bg: #16121D;
+      --text: #F4EFF8;
+      --text-2: #C9C0D6;
+      --muted: #A99FB8;
+      --faint: #6E6580;
+      --line: rgba(244, 239, 248, 0.10);
+      --coral: #F4876A;
+      --teal: #4EC5BE;
+      --violet: #B393F2;
+      --live: #6FE3A5;
+      --wip: #F2C25B;
+      --display: 'Outfit', 'Avenir Next', 'Segoe UI', sans-serif;
+      --body: 'Manrope', 'Avenir Next', 'Segoe UI', sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--coral); outline-offset: 4px; border-radius: 6px; }
+
+    .glow { position: absolute; border-radius: 50%; pointer-events: none; }
+    .glow-a { top: -260px; right: -180px; width: 720px; height: 720px; background: radial-gradient(closest-side, rgba(244,135,106,0.28), rgba(244,135,106,0)); }
+    .glow-b { top: 620px; left: -260px; width: 640px; height: 640px; background: radial-gradient(closest-side, rgba(78,197,190,0.20), rgba(78,197,190,0)); }
+
+    .page { position: relative; overflow: hidden; min-height: 100vh; }
+    .wrap { position: relative; max-width: 1248px; margin: 0 auto; padding: 0 24px; }
+
+    header { display: flex; align-items: center; justify-content: space-between; height: 92px; }
+    .brand { font-family: var(--display); font-weight: 600; font-size: 22px; letter-spacing: -0.01em; }
+    .brand span { color: var(--coral); }
+    nav { display: flex; gap: 32px; font-size: 15px; font-weight: 600; color: var(--muted); }
+    nav a:hover { color: var(--text); }
+    .nav-contact { display: none; }
+
+    .hero { display: flex; flex-direction: column; gap: 28px; padding: 84px 0 72px; max-width: 900px; }
+    .eyebrow { display: flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--coral); }
+    h1 { margin: 0; font-family: var(--display); font-weight: 600; font-size: clamp(40px, 6vw, 80px); line-height: 1.04; letter-spacing: -0.02em; text-wrap: balance; }
+    .lede { margin: 0; font-size: clamp(16px, 1.5vw, 21px); line-height: 1.5; color: var(--muted); max-width: 640px; text-wrap: pretty; }
+
+    .tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .tile {
+      display: flex; flex-direction: column; justify-content: space-between; gap: 32px;
+      min-height: 400px; padding: 32px; border-radius: 28px;
+      border: 1px solid; color: var(--text);
+      transition: transform .18s ease;
+    }
+    a.tile:hover { transform: translateY(-4px); }
+    .tile-coral { background: linear-gradient(160deg, rgba(244,135,106,0.22), rgba(244,135,106,0.06)); border-color: rgba(244,135,106,0.35); }
+    .tile-teal { background: linear-gradient(160deg, rgba(78,197,190,0.22), rgba(78,197,190,0.06)); border-color: rgba(78,197,190,0.35); }
+    .tile-next { background: rgba(179,147,242,0.05); border: 1px dashed rgba(179,147,242,0.45); }
+    .tile-top { display: flex; align-items: flex-start; justify-content: space-between; }
+    .icon { display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 18px; color: var(--bg); }
+    .tile-coral .icon { background: var(--coral); }
+    .tile-teal .icon { background: var(--teal); }
+    .tile-next .icon { border: 1.5px dashed var(--violet); color: var(--violet); }
+    .status { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: rgba(22,18,29,0.55); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+    .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+    .status-live { color: var(--live); }
+    .status-wip { color: var(--wip); }
+    .status-plan { color: var(--violet); }
+    .status-plan::before { background: transparent; border: 1.5px solid currentColor; }
+    .tile-body { display: flex; flex-direction: column; gap: 10px; }
+    .tile-name { font-family: var(--display); font-weight: 600; font-size: 40px; letter-spacing: -0.01em; line-height: 1; }
+    .tile-host { font-size: 14px; font-weight: 600; }
+    .tile-coral .tile-host { color: var(--coral); }
+    .tile-teal .tile-host { color: var(--teal); }
+    .tile-desc { margin: 6px 0 0; font-size: 16px; line-height: 1.5; color: var(--text-2); }
+    .tile-next .tile-name { color: var(--violet); }
+    .tile-next .tile-host, .tile-next .tile-desc { color: #8D82A3; }
+
+    .about { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; padding: 96px 0 64px; border-bottom: 1px solid var(--line); }
+    .about-text { display: flex; flex-direction: column; gap: 16px; }
+    h2 { margin: 0; font-family: var(--display); font-weight: 600; font-size: 34px; letter-spacing: -0.01em; line-height: 1.1; }
+    .about p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--muted); max-width: 52ch; text-wrap: pretty; }
+    .contact { display: flex; flex-direction: column; gap: 12px; align-self: end; }
+    .label { font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+    .pills { display: flex; flex-wrap: wrap; gap: 12px; }
+    .pill { display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px; border-radius: 999px; border: 1px solid rgba(244,239,248,0.18); font-size: 15px; font-weight: 600; transition: border-color .15s, color .15s; }
+    .pill:hover { border-color: var(--coral); color: var(--coral); }
+
+    footer { display: flex; justify-content: space-between; gap: 16px; padding: 24px 0 40px; font-size: 13px; font-weight: 600; color: var(--faint); }
+
+    @media (max-width: 900px) {
+      .tiles { grid-template-columns: 1fr; gap: 16px; }
+      .tile { min-height: 0; padding: 24px; border-radius: 24px; gap: 22px; }
+      .icon { width: 52px; height: 52px; border-radius: 15px; }
+      .tile-name { font-size: 32px; }
+      .about { grid-template-columns: 1fr; gap: 28px; padding: 56px 0 40px; }
+      .hero { padding: 40px 0 36px; gap: 18px; }
+      header { height: 72px; }
+      nav { display: none; }
+      .nav-contact { display: inline-flex; padding: 10px 14px; border-radius: 999px; border: 1px solid rgba(244,239,248,0.18); font-size: 13px; font-weight: 600; }
+      .glow-a { top: -200px; right: -160px; width: 440px; height: 440px; }
+      .glow-b { top: 900px; left: -200px; width: 420px; height: 420px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .tile, .pill { transition: none; }
+      a.tile:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+
+  <div class="wrap">
+    <header>
+      <a class="brand" href="/">dumitru<span>.cloud</span></a>
+      <nav aria-label="Navigare">
+        <a href="#proiecte">Proiecte</a>
+        <a href="#despre">Despre</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="nav-contact" href="#contact">Contact</a>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">Cloud personal · proiecte proprii</p>
+      <h1>Ce construiesc, la un click distanță.</h1>
+      <p class="lede">Aplicații mici, făcute pentru uz propriu și găzduite pe subdomeniile de mai jos. Ce e marcat verde funcționează chiar acum.</p>
+    </section>
+
+    <section class="tiles" id="proiecte" aria-label="Proiecte">
+
+      <a class="tile tile-coral" href="https://sarcini.dumitru.cloud">
+        <div class="tile-top">
+          <div class="icon" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>
+          </div>
+          <span class="status status-live">Live</span>
+        </div>
+        <div class="tile-body">
+          <div class="tile-name">Sarcini</div>
+          <div class="tile-host">sarcini.dumitru.cloud</div>
+          <!-- TODO: descriere reală -->
+          <p class="tile-desc">Manager de sarcini personale. Liste, termene și ce am de făcut azi, fără nimic în plus.</p>
+        </div>
+      </a>
+
+      <a class="tile tile-teal" href="https://stiri.dumitru.cloud">
+        <div class="tile-top">
+          <div class="icon" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a2 2 0 0 1 2 2v11a2 2 0 0 0 2 2H6a2 2 0 0 1-2-2z"/><path d="M19 20a2 2 0 0 0 2-2V9h-2"/><rect x="7" y="8" width="5" height="4"/><path d="M14 9h2M14 12h2M7 15h9"/></svg>
+          </div>
+          <span class="status status-wip">În lucru</span>
+        </div>
+        <div class="tile-body">
+          <div class="tile-name">Știri</div>
+          <div class="tile-host">stiri.dumitru.cloud</div>
+          <!-- TODO: descriere reală -->
+          <p class="tile-desc">Știrile din sursele pe care le urmăresc, într-un singur flux, fără reclame.</p>
+        </div>
+      </a>
+
+      <div class="tile tile-next">
+        <div class="tile-top">
+          <div class="icon" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </div>
+          <span class="status status-plan">Planificat</span>
+        </div>
+        <div class="tile-body">
+          <div class="tile-name">Următorul</div>
+          <div class="tile-host">···.dumitru.cloud</div>
+          <p class="tile-desc">Locul e rezervat. Când apare, apare aici.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="about" id="despre">
+      <div class="about-text">
+        <h2>Salut, sunt Dumitru.</h2>
+        <p>Construiesc aplicații mici care rezolvă probleme concrete din ziua mea și le găzduiesc singur pe acest domeniu. Fiecare subdomeniu e un proiect separat, cu propriul cod și propria pagină.</p>
+      </div>
+      <div class="contact" id="contact">
+        <div class="label">Contact</div>
+        <div class="pills">
+          <a class="pill" href="mailto:prisacarudumitru@gmail.com">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 8l9 6 9-6"/></svg>E-mail
+          </a>
+          <!-- TODO: pune linkul real de GitHub sau șterge acest buton -->
+          <a class="pill" href="https://github.com/">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 22v-3.5a3 3 0 0 0-.8-2.2c2.7-.3 5.5-1.3 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.7 11.7 0 0 0-6 0C7.5 3.6 6.5 3.9 6.5 3.9a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 5 10.3c0 4.7 2.8 5.7 5.5 6a3 3 0 0 0-.8 2.2V22"/><path d="M9 19c-4 1.5-4-2-6-2"/></svg>GitHub
+          </a>
+          <!-- TODO: pune linkul real de LinkedIn sau șterge acest buton -->
+          <a class="pill" href="https://linkedin.com/">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.5M12 17v-4a2 2 0 0 1 4 0v4"/></svg>LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 dumitru.cloud</span>
+      <span>găzduit pe cont propriu</span>
+    </footer>
+  </div>
+</div>
+</body>
+</html>

@@ -76,11 +76,13 @@
     .tile-coral { background: linear-gradient(160deg, rgba(244,135,106,0.22), rgba(244,135,106,0.06)); border-color: rgba(244,135,106,0.35); }
     .tile-teal { background: linear-gradient(160deg, rgba(78,197,190,0.22), rgba(78,197,190,0.06)); border-color: rgba(78,197,190,0.35); }
     .tile-violet { background: linear-gradient(160deg, rgba(179,147,242,0.22), rgba(179,147,242,0.06)); border-color: rgba(179,147,242,0.35); }
+    .tile-verde { background: linear-gradient(160deg, rgba(111,227,165,0.22), rgba(111,227,165,0.06)); border-color: rgba(111,227,165,0.35); }
     .tile-top { display: flex; align-items: flex-start; justify-content: space-between; }
     .icon { display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 18px; color: var(--bg); }
     .tile-coral .icon { background: var(--coral); }
     .tile-teal .icon { background: var(--teal); }
     .tile-violet .icon { background: var(--violet); }
+    .tile-verde .icon { background: var(--live); }
     .status { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: rgba(22,18,29,0.55); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
     .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
     .status-live { color: var(--live); }
@@ -93,6 +95,7 @@
     .tile-coral .tile-host { color: var(--coral); }
     .tile-teal .tile-host { color: var(--teal); }
     .tile-violet .tile-host { color: var(--violet); }
+    .tile-verde .tile-host { color: var(--live); }
     .tile-desc { margin: 6px 0 0; font-size: 16px; line-height: 1.5; color: var(--text-2); }
 
     .about { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; padding: 96px 0 64px; border-bottom: 1px solid var(--line); }
@@ -201,6 +204,20 @@
           <div class="tile-name">Notițe</div>
           <div class="tile-host">notite.dumitru.cloud</div>
           <p class="tile-desc">Notița de azi și câteva notițe durabile. Scrii, se salvează singur.</p>
+        </div>
+      </a>
+
+      <a class="tile tile-verde" href="https://ai.dumitru.cloud" target="_blank" rel="noopener">
+        <div class="tile-top">
+          <div class="icon" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-1.5-1.5-4-2-8-2v14c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2V4c-4 0-6.5.5-8 2z"/><path d="M12 6v14"/></svg>
+          </div>
+          <span class="status status-wip">În lucru</span>
+        </div>
+        <div class="tile-body">
+          <div class="tile-name">Cataloage</div>
+          <div class="tile-host">ai.dumitru.cloud</div>
+          <p class="tile-desc">Cataloage de legislație penitenciară, cu notebook-uri NotebookLM și rezumate audio, pentru colegi.</p>
         </div>
       </a>
 

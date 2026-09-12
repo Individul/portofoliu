@@ -65,7 +65,7 @@
     h1 { margin: 0; font-family: var(--display); font-weight: 600; font-size: clamp(40px, 6vw, 80px); line-height: 1.04; letter-spacing: -0.02em; text-wrap: balance; }
     .lede { margin: 0; font-size: clamp(16px, 1.5vw, 21px); line-height: 1.5; color: var(--muted); max-width: 640px; text-wrap: pretty; }
 
-    .tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+    .tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
     .tile {
       display: flex; flex-direction: column; justify-content: space-between; gap: 32px;
       min-height: 380px; padding: 28px; border-radius: 28px;
@@ -77,12 +77,14 @@
     .tile-teal { background: linear-gradient(160deg, rgba(78,197,190,0.22), rgba(78,197,190,0.06)); border-color: rgba(78,197,190,0.35); }
     .tile-violet { background: linear-gradient(160deg, rgba(179,147,242,0.22), rgba(179,147,242,0.06)); border-color: rgba(179,147,242,0.35); }
     .tile-verde { background: linear-gradient(160deg, rgba(111,227,165,0.22), rgba(111,227,165,0.06)); border-color: rgba(111,227,165,0.35); }
+    .tile-galben { background: linear-gradient(160deg, rgba(242,194,91,0.22), rgba(242,194,91,0.06)); border-color: rgba(242,194,91,0.35); }
     .tile-top { display: flex; align-items: flex-start; justify-content: space-between; }
     .icon { display: flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 18px; color: var(--bg); }
     .tile-coral .icon { background: var(--coral); }
     .tile-teal .icon { background: var(--teal); }
     .tile-violet .icon { background: var(--violet); }
     .tile-verde .icon { background: var(--live); }
+    .tile-galben .icon { background: var(--wip); }
     .status { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; background: rgba(22,18,29,0.55); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
     .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
     .status-live { color: var(--live); }
@@ -96,6 +98,7 @@
     .tile-teal .tile-host { color: var(--teal); }
     .tile-violet .tile-host { color: var(--violet); }
     .tile-verde .tile-host { color: var(--live); }
+    .tile-galben .tile-host { color: var(--wip); }
     .tile-desc { margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: var(--text-2); }
 
     .about { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; padding: 96px 0 64px; border-bottom: 1px solid var(--line); }
@@ -222,6 +225,20 @@
           <div class="tile-name">Întreabă AI</div>
           <div class="tile-host">ai.dumitru.cloud</div>
           <p class="tile-desc">Inteligența artificială schimbă felul în care căutăm informația. Te ajută să găsești rapid răspunsul din legislație, cu trimitere la sursă.</p>
+        </div>
+      </a>
+
+      <a class="tile tile-galben" href="https://unelte.dumitru.cloud" target="_blank" rel="noopener">
+        <div class="tile-top">
+          <div class="icon" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 0 0-5.3 5.2L4 17l3 3 5.3-5.2a4 4 0 0 0 5.2-5.3l-2.6 2.6-2.2-2.2z"/></svg>
+          </div>
+          <span class="status status-live">Live</span>
+        </div>
+        <div class="tile-body">
+          <div class="tile-name">Unelte</div>
+          <div class="tile-host">unelte.dumitru.cloud</div>
+          <p class="tile-desc">Calculator de termen, concurs sau cumul de sentințe, unelte PDF. Fără cont, fișierele rămân pe calculatorul tău.</p>
         </div>
       </a>
 

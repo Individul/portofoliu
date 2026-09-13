@@ -79,6 +79,7 @@
     .tile-violet { background: linear-gradient(160deg, rgba(179,147,242,0.22), rgba(179,147,242,0.06)); border-color: rgba(179,147,242,0.35); }
     .tile-verde { background: linear-gradient(160deg, rgba(111,227,165,0.22), rgba(111,227,165,0.06)); border-color: rgba(111,227,165,0.35); }
     .tile-galben { background: linear-gradient(160deg, rgba(242,194,91,0.22), rgba(242,194,91,0.06)); border-color: rgba(242,194,91,0.35); }
+    .tile-albastru { background: linear-gradient(160deg, rgba(123,147,255,0.22), rgba(123,147,255,0.06)); border-color: rgba(123,147,255,0.35); }
     .tile-next {
       border: 1px dashed rgba(179,147,242,0.45);
       background:
@@ -103,6 +104,7 @@
     .tile-violet .icon { background: var(--violet); }
     .tile-verde .icon { background: var(--live); }
     .tile-galben .icon { background: var(--wip); }
+    .tile-albastru .icon { background: #7B93FF; }
     .tile-next .icon { border: 1.5px dashed var(--violet); color: var(--violet); }
     .status { position: absolute; top: 18px; right: 18px; display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px; border-radius: 999px; background: rgba(22,18,29,0.55); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
     .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
@@ -118,6 +120,7 @@
     .tile-violet .tile-host { color: var(--violet); }
     .tile-verde .tile-host { color: var(--live); }
     .tile-galben .tile-host { color: var(--wip); }
+    .tile-albastru .tile-host { color: #7B93FF; }
     .tile-desc { margin: 8px -92px 0 0; font-size: 14px; line-height: 1.5; color: var(--text-2); }
     .tile-next .tile-name { color: var(--violet); }
     .tile-next .tile-host { color: #8D82A3; }
@@ -266,6 +269,20 @@
           <div class="tile-name">Unelte</div>
           <div class="tile-host">unelte.dumitru.cloud</div>
           <p class="tile-desc">Calculator de termen, concurs sau cumul de sentințe, unelte PDF. Fără cont, fișierele rămân pe calculatorul tău.</p>
+        </div>
+      </a>
+
+      <a class="tile tile-albastru" href="https://instante.dumitru.cloud" target="_blank" rel="noopener">
+        <div class="tile-top">
+          <div class="icon" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10M9 21V10M15 21V10M19 21V10"/><path d="M3 10l9-6 9 6z"/></svg>
+          </div>
+          <span class="status status-live">Live</span>
+        </div>
+        <div class="tile-body">
+          <div class="tile-name">Instanțe</div>
+          <div class="tile-host">instante.dumitru.cloud</div>
+          <p class="tile-desc">Căutare unificată în instanțele din Moldova. Un singur câmp de căutare în loc de zeci de site-uri.</p>
         </div>
       </a>
 

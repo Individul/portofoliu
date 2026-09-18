@@ -10,3 +10,5 @@ Site static, fără build. Fișierele din rădăcină sunt publicate direct pe C
 - `robots.txt`
 
 Ca să adaugi un proiect nou, copiază un bloc `.tile` din `index.html` și schimbă numele, subdomeniul, descrierea și starea (`status-live`, `status-wip`, `status-plan`). Cardul „Pe masa de lucru” rămâne ultimul din grilă și completează singur rândul, deci proiectele noi se pun înaintea lui.
+
+Linkurile rapide (butonul „Linkuri” din antet sau tasta `/`) se editează în `index.html`, în lista `QUICK_LINKS` de la sfârșitul fișierului: grupuri de forma `[nume, adresă, culoare]`.

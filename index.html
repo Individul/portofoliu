@@ -208,6 +208,8 @@
     .av-search input:hover { border-color: rgba(244,239,248,0.24); }
     .av-search input:focus { outline: none; border-color: var(--coral); background: rgba(244,239,248,0.06); box-shadow: 0 0 0 3px rgba(244,135,106,0.16); }
     .av-lupa { position: absolute; left: 17px; top: 17px; color: var(--muted); pointer-events: none; }
+    .av-data { position: absolute; top: 0; right: 18px; line-height: 52px; font-size: 13px; font-weight: 500; color: var(--faint); pointer-events: none; white-space: nowrap; }
+    .av-search.are-data input { padding-right: 200px; }
     .av-rez { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
     .av-rez:empty { display: none; }
     .av-rez a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 16px; align-items: center; padding: 11px 16px; border-radius: 14px; background: rgba(244,239,248,0.04); border: 1px solid var(--line); }
@@ -226,10 +228,14 @@
       .av-search { margin-bottom: 12px; }
       .av-search input { height: 48px; font-size: 16px; }
       .av-lupa { top: 15px; }
+      .av-data { line-height: 48px; }
     }
     @media (max-width: 600px) {
       .av-rez a { grid-template-columns: minmax(0, 1fr); }
       .av-st { grid-column: 1; grid-row: auto; text-align: left; }
+      /* pe telefon linia e prea ingusta pentru data; o arata randul de sub rezultate */
+      .av-data { display: none; }
+      .av-search.are-data input { padding-right: 18px; }
     }
   </style>
 </head>
@@ -264,6 +270,7 @@
     <form class="av-search" action="https://avocati.dumitru.cloud/" method="get" target="_blank" role="search" aria-label="Căutare în registrul avocaților">
       <svg class="av-lupa" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
       <input type="search" name="q" autocomplete="off" spellcheck="false" placeholder="Caută un avocat în registrul MJ: nume sau nr. licenței" aria-label="Caută în registrul avocaților">
+      <span class="av-data" hidden></span>
       <ul class="av-rez"></ul>
       <p class="av-info" aria-live="polite"></p>
     </form>
@@ -500,7 +507,8 @@
   })();
 
   /* Cautare in registrul avocatilor (avocati.dumitru.cloud), deasupra cardurilor.
-     Lista compacta se descarca o singura data, la primul focus pe camp.
+     Lista compacta se descarca o singura data, dupa incarcarea paginii,
+     ca data actualizarii sa apara in dreapta liniei.
      Fara JavaScript, Enter deschide aplicatia cu cautarea in adresa. */
   (function () {
     var form = document.querySelector('.av-search');
@@ -518,7 +526,7 @@
           .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
           .then(function (d) {
             d.avocati.forEach(function (a) { a.t = fold(a[0]).replace(/[()\-]/g, ' ').split(/\s+/).filter(Boolean); });
-            date = d; return d;
+            date = d; arataData(d); return d;
           })
           .catch(function (e) { incarcare = null; throw e; });
       }
@@ -578,6 +586,16 @@
       }
     }
 
+    function arataData(d) {
+      var span = form.querySelector('.av-data');
+      if (!span || !d.actualizata_la) return;
+      span.textContent = 'Lista MJ din ' + d.actualizata_la;
+      span.hidden = false;
+      form.classList.add('are-data');
+    }
+
+    // lista se descarca imediat ce pagina e gata (sau la primul focus, daca e mai devreme)
+    (window.requestIdleCallback || function (f) { setTimeout(f, 300); })(function () { incarca().catch(function () {}); });
     input.addEventListener('focus', function () { incarca().catch(function () {}); });
     input.addEventListener('input', afiseaza);
     input.addEventListener('keydown', function (e) { if (e.key === 'Escape' && input.value) { input.value = ''; afiseaza(); } });

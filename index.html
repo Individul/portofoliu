@@ -101,7 +101,6 @@
     .tile-verde { background: linear-gradient(160deg, rgba(111,227,165,0.22), rgba(111,227,165,0.06)); border-color: rgba(111,227,165,0.35); }
     .tile-galben { background: linear-gradient(160deg, rgba(242,194,91,0.22), rgba(242,194,91,0.06)); border-color: rgba(242,194,91,0.35); }
     .tile-albastru { background: linear-gradient(160deg, rgba(123,147,255,0.22), rgba(123,147,255,0.06)); border-color: rgba(123,147,255,0.35); }
-    .tile-roz { background: linear-gradient(160deg, rgba(239,146,184,0.22), rgba(239,146,184,0.06)); border-color: rgba(239,146,184,0.35); }
     .tile-next {
       border: 1px dashed rgba(179,147,242,0.45);
       background:
@@ -127,7 +126,6 @@
     .tile-verde .icon { background: var(--live); }
     .tile-galben .icon { background: var(--wip); }
     .tile-albastru .icon { background: #7B93FF; }
-    .tile-roz .icon { background: #EF92B8; }
     .tile-next .icon { border: 1.5px dashed var(--violet); color: var(--violet); }
     .status { position: absolute; top: 18px; right: 18px; display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px; border-radius: 999px; background: rgba(22,18,29,0.55); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
     .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
@@ -144,7 +142,6 @@
     .tile-verde .tile-host { color: var(--live); }
     .tile-galben .tile-host { color: var(--wip); }
     .tile-albastru .tile-host { color: #7B93FF; }
-    .tile-roz .tile-host { color: #EF92B8; }
     .tile-desc { margin: 8px -92px 0 0; font-size: 14px; line-height: 1.5; color: var(--text-2); }
     .tile-next .tile-name { color: var(--violet); }
     .tile-next .tile-host { color: #8D82A3; }
@@ -204,23 +201,17 @@
       .cycle span:first-child { opacity: 1; }
     }
 
-    /* Card lat, pe toata latimea grilei. Cardul-invitatie il urmeaza,
-       ca randul de sub el sa ramana complet. */
-    .tile-lat, .tile-lat ~ .tile-next { grid-column: 1 / -1; }
-    .tile-lat .tile-desc { max-width: 68ch; }
-
-    /* Cautare in registrul avocatilor, direct pe card. Numele e linkul cardului,
-       iar ::after il intinde pe tot cardul; campul de cautare sta deasupra. */
-    .tile-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
-    .av-search { position: relative; z-index: 1; margin: 14px -92px 0 0; max-width: 640px; }
-    .av-search input { appearance: none; width: 100%; height: 44px; padding: 0 14px 0 40px; border-radius: 12px; border: 1px solid rgba(239,146,184,0.35); background: rgba(22,18,29,0.55); color: var(--text); font: 500 15px/1 var(--body); }
+    /* Cautare in registrul avocatilor (avocati.dumitru.cloud), o linie deasupra cardurilor */
+    .av-search { position: relative; margin: 0 0 20px; }
+    .av-search input { appearance: none; width: 100%; height: 52px; padding: 0 18px 0 48px; border-radius: 16px; border: 1px solid rgba(244,239,248,0.14); background: rgba(244,239,248,0.04); color: var(--text); font: 500 16px/1 var(--body); transition: border-color .15s, background .15s; }
     .av-search input::placeholder { color: var(--faint); }
-    .av-search input:focus { outline: none; border-color: #EF92B8; box-shadow: 0 0 0 3px rgba(239,146,184,0.18); }
-    .av-lupa { position: absolute; left: 13px; top: 13px; color: var(--muted); pointer-events: none; }
+    .av-search input:hover { border-color: rgba(244,239,248,0.24); }
+    .av-search input:focus { outline: none; border-color: var(--coral); background: rgba(244,239,248,0.06); box-shadow: 0 0 0 3px rgba(244,135,106,0.16); }
+    .av-lupa { position: absolute; left: 17px; top: 17px; color: var(--muted); pointer-events: none; }
     .av-rez { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
     .av-rez:empty { display: none; }
-    .av-rez a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; align-items: center; padding: 10px 12px; border-radius: 12px; background: rgba(22,18,29,0.45); border: 1px solid transparent; }
-    .av-rez a:hover { border-color: rgba(239,146,184,0.45); }
+    .av-rez a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 16px; align-items: center; padding: 11px 16px; border-radius: 14px; background: rgba(244,239,248,0.04); border: 1px solid var(--line); }
+    .av-rez a:hover { border-color: rgba(244,135,106,0.5); }
     .av-nume { font-weight: 600; font-size: 15px; overflow-wrap: anywhere; }
     .av-meta { grid-column: 1; font-size: 12.5px; color: var(--muted); }
     .av-st { grid-column: 2; grid-row: 1 / span 2; font-size: 12.5px; font-weight: 600; text-align: right; }
@@ -230,10 +221,13 @@
     .av-st.mentiune { color: var(--violet); }
     .av-info { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
     .av-info:empty { display: none; }
-    .av-info a { color: #EF92B8; font-weight: 600; }
-    /* pe telefon cautarea ocupa toata latimea cardului, sub iconita (44px + 14px spatiu) */
+    .av-info a { color: var(--coral); font-weight: 600; }
+    @media (max-width: 900px) {
+      .av-search { margin-bottom: 12px; }
+      .av-search input { height: 48px; font-size: 16px; }
+      .av-lupa { top: 15px; }
+    }
     @media (max-width: 600px) {
-      .av-search { margin-left: -58px; }
       .av-rez a { grid-template-columns: minmax(0, 1fr); }
       .av-st { grid-column: 1; grid-row: auto; text-align: left; }
     }
@@ -266,6 +260,13 @@
       <h1>Un domeniu. Câteva aplicații utile.</h1>
       <p class="lede">Instrumente mici pe care le folosesc zilnic.</p>
     </section>
+
+    <form class="av-search" action="https://avocati.dumitru.cloud/" method="get" target="_blank" role="search" aria-label="Căutare în registrul avocaților">
+      <svg class="av-lupa" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input type="search" name="q" autocomplete="off" spellcheck="false" placeholder="Caută un avocat în registrul MJ: nume sau nr. licenței" aria-label="Caută în registrul avocaților">
+      <ul class="av-rez"></ul>
+      <p class="av-info" aria-live="polite"></p>
+    </form>
 
     <section class="tiles" id="proiecte" aria-label="Proiecte">
 
@@ -354,26 +355,6 @@
           <p class="tile-desc">Căutare unificată în instanțele din Moldova. Un singur câmp de căutare în loc de zeci de site-uri.</p>
         </div>
       </a>
-
-      <div class="tile tile-roz tile-lat">
-        <div class="tile-top">
-          <div class="icon" aria-hidden="true">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10.5" r="2.2"/><path d="M5.5 16.5c.6-1.6 2-2.5 3.5-2.5s2.9.9 3.5 2.5"/><path d="M15 9.5h3.5M15 13h3.5"/></svg>
-          </div>
-          <span class="status status-live">Live</span>
-        </div>
-        <div class="tile-body">
-          <a class="tile-name tile-link" href="https://avocati.dumitru.cloud" target="_blank" rel="noopener">Avocați</a>
-          <div class="tile-host">avocati.dumitru.cloud</div>
-          <p class="tile-desc">Registrul avocaților din Moldova, după lista Ministerului Justiției. Cauți după nume, fără grija diacriticelor sau a ordinii.</p>
-          <form class="av-search" action="https://avocati.dumitru.cloud/" method="get" target="_blank" role="search">
-            <svg class="av-lupa" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-            <input type="search" name="q" autocomplete="off" spellcheck="false" placeholder="Caută un avocat: nume sau nr. licenței" aria-label="Caută în registrul avocaților">
-            <ul class="av-rez"></ul>
-            <p class="av-info" aria-live="polite"></p>
-          </form>
-        </div>
-      </div>
 
       <!-- Cardul-invitatie, scos temporar. Se readuce stergand acest comentariu.
       <a class="tile tile-next js-mail" href="#contact" data-user="contact" data-host="dumitru.cloud" data-subject="O idee pentru dumitru.cloud">
@@ -518,7 +499,7 @@
     });
   })();
 
-  /* Cautare in registrul avocatilor (avocati.dumitru.cloud), direct pe card.
+  /* Cautare in registrul avocatilor (avocati.dumitru.cloud), deasupra cardurilor.
      Lista compacta se descarca o singura data, la primul focus pe camp.
      Fara JavaScript, Enter deschide aplicatia cu cautarea in adresa. */
   (function () {

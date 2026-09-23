@@ -201,41 +201,57 @@
       .cycle span:first-child { opacity: 1; }
     }
 
-    /* Cautare in registrul avocatilor (avocati.dumitru.cloud), o linie deasupra cardurilor */
-    .av-search { position: relative; margin: 0 0 20px; }
+    /* Cautare in registrul avocatilor (avocati.dumitru.cloud), o linie deasupra cardurilor.
+       Rezultatele apar intr-un panou lipit de linie, care pluteste peste carduri. */
+    .av-search { position: relative; z-index: 20; margin: 0 0 20px; }
     .av-search input { appearance: none; width: 100%; height: 52px; padding: 0 18px 0 48px; border-radius: 16px; border: 1px solid rgba(244,239,248,0.14); background: rgba(244,239,248,0.04); color: var(--text); font: 500 16px/1 var(--body); transition: border-color .15s, background .15s; }
     .av-search input::placeholder { color: var(--faint); }
+    .av-search input::-webkit-search-cancel-button { -webkit-appearance: none; display: none; }
     .av-search input:hover { border-color: rgba(244,239,248,0.24); }
     .av-search input:focus { outline: none; border-color: var(--coral); background: rgba(244,239,248,0.06); box-shadow: 0 0 0 3px rgba(244,135,106,0.16); }
+    .av-search.deschis input { border-color: var(--coral); border-radius: 16px 16px 0 0; background: #1F1A29; box-shadow: none; }
     .av-lupa { position: absolute; left: 17px; top: 17px; color: var(--muted); pointer-events: none; }
     .av-data { position: absolute; top: 0; right: 18px; line-height: 52px; font-size: 13px; font-weight: 500; color: var(--faint); pointer-events: none; white-space: nowrap; }
     .av-search.are-data input { padding-right: 200px; }
-    .av-rez { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-    .av-rez:empty { display: none; }
-    .av-rez a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 16px; align-items: center; padding: 11px 16px; border-radius: 14px; background: rgba(244,239,248,0.04); border: 1px solid var(--line); }
-    .av-rez a:hover { border-color: rgba(244,135,106,0.5); }
+    .av-search.are-text .av-data { right: 52px; }
+    .av-search.are-text input { padding-right: 52px; }
+    .av-search.are-data.are-text input { padding-right: 236px; }
+    .av-sterge { position: absolute; top: 10px; right: 10px; display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 0; border-radius: 10px; background: none; color: var(--muted); font: 400 22px/1 var(--body); cursor: pointer; }
+    .av-sterge[hidden] { display: none; }
+    .av-sterge:hover { color: var(--text); background: rgba(244,239,248,0.08); }
+    .av-panou { position: absolute; top: 100%; left: 0; right: 0; padding: 6px; border: 1px solid var(--coral); border-top-color: var(--line); border-radius: 0 0 16px 16px; background: #1F1A29; box-shadow: 0 24px 60px rgba(0,0,0,0.5); }
+    .av-cap, .av-subsol { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 12px 6px; }
+    .av-cap { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+    .av-rez { list-style: none; margin: 0; padding: 0; }
+    .av-rez a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 12px; align-items: center; padding: 10px 12px; border-radius: 12px; }
+    .av-rez a.ales { background: rgba(244,135,106,0.12); }
+    .av-linie { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; min-width: 0; }
     .av-nume { font-weight: 600; font-size: 15px; overflow-wrap: anywhere; }
-    .av-meta { grid-column: 1; font-size: 12.5px; color: var(--muted); }
-    .av-st { grid-column: 2; grid-row: 1 / span 2; font-size: 12.5px; font-weight: 600; text-align: right; }
-    .av-st.activ { color: var(--live); }
-    .av-st.suspendat { color: var(--wip); }
-    .av-st.incetat { color: var(--coral); }
-    .av-st.mentiune { color: var(--violet); }
-    .av-info { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
-    .av-info:empty { display: none; }
-    .av-info a { color: var(--coral); font-weight: 600; }
+    .av-st { padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+    .av-st.activ { color: var(--live); background: rgba(111,227,165,0.14); }
+    .av-st.suspendat { color: var(--wip); background: rgba(242,194,91,0.14); }
+    .av-st.incetat { color: var(--coral); background: rgba(244,135,106,0.14); }
+    .av-st.mentiune { color: var(--violet); background: rgba(179,147,242,0.14); }
+    .av-meta { font-size: 12.5px; color: var(--muted); }
+    .av-sageata { grid-column: 2; grid-row: 1 / span 2; font-size: 16px; color: var(--faint); }
+    .av-rez a.ales .av-sageata { color: var(--coral); }
+    .av-mesaj { padding: 12px; font-size: 14px; color: var(--text-2); }
+    .av-mesaj a, .av-subsol a { color: var(--coral); font-weight: 600; }
+    .av-subsol { margin-top: 4px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--faint); }
+    .av-subsol a { margin-left: auto; }
+    .av-subsol:empty { display: none; }
     @media (max-width: 900px) {
       .av-search { margin-bottom: 12px; }
       .av-search input { height: 48px; font-size: 16px; }
       .av-lupa { top: 15px; }
       .av-data { line-height: 48px; }
+      .av-sterge { top: 8px; }
     }
     @media (max-width: 600px) {
-      .av-rez a { grid-template-columns: minmax(0, 1fr); }
-      .av-st { grid-column: 1; grid-row: auto; text-align: left; }
-      /* pe telefon linia e prea ingusta pentru data; o arata randul de sub rezultate */
-      .av-data { display: none; }
+      /* pe telefon linia e prea ingusta pentru data si pentru indiciul cu sagetile */
+      .av-data, .av-indiciu { display: none; }
       .av-search.are-data input { padding-right: 18px; }
+      .av-search.are-data.are-text input { padding-right: 52px; }
     }
   </style>
 </head>
@@ -269,10 +285,14 @@
 
     <form class="av-search" action="https://avocati.dumitru.cloud/" method="get" target="_blank" role="search" aria-label="Căutare în registrul avocaților">
       <svg class="av-lupa" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      <input type="search" name="q" autocomplete="off" spellcheck="false" placeholder="Caută un avocat în registrul MJ: nume sau nr. licenței" aria-label="Caută în registrul avocaților">
+      <input type="search" name="q" autocomplete="off" spellcheck="false" placeholder="Caută un avocat în registrul MJ: nume sau nr. licenței" aria-label="Caută în registrul avocaților" aria-controls="av-panou" aria-expanded="false">
       <span class="av-data" hidden></span>
-      <ul class="av-rez"></ul>
-      <p class="av-info" aria-live="polite"></p>
+      <button class="av-sterge" type="button" aria-label="Șterge căutarea" hidden>×</button>
+      <div class="av-panou" id="av-panou" hidden>
+        <div class="av-cap"><span>Registrul avocaților</span><span class="av-numar" role="status"></span></div>
+        <ul class="av-rez"></ul>
+        <div class="av-subsol"></div>
+      </div>
     </form>
 
     <section class="tiles" id="proiecte" aria-label="Proiecte">
@@ -508,15 +528,17 @@
 
   /* Cautare in registrul avocatilor (avocati.dumitru.cloud), deasupra cardurilor.
      Lista compacta se descarca o singura data, dupa incarcarea paginii,
-     ca data actualizarii sa apara in dreapta liniei.
+     ca data actualizarii sa apara in dreapta liniei. Rezultatele apar intr-un
+     panou lipit de linie; sagetile aleg un rezultat, Enter il deschide.
      Fara JavaScript, Enter deschide aplicatia cu cautarea in adresa. */
   (function () {
     var form = document.querySelector('.av-search');
     if (!form || !window.fetch) return;
-    var BAZA = 'https://avocati.dumitru.cloud/';
-    var input = form.querySelector('input'), rez = form.querySelector('.av-rez'), info = form.querySelector('.av-info');
+    var BAZA = 'https://avocati.dumitru.cloud/', MAX = 5;
+    var input = form.querySelector('input'), sterge = form.querySelector('.av-sterge'), panou = form.querySelector('.av-panou'),
+        numar = form.querySelector('.av-numar'), rez = form.querySelector('.av-rez'), subsol = form.querySelector('.av-subsol');
     var ETICHETE = { activ: 'Drept de exercitare', suspendat: 'Suspendat', incetat: 'Încetat', mentiune: 'Vezi mențiuni' };
-    var date = null, incarcare = null;
+    var date = null, incarcare = null, ales = -1;
     // aceeasi normalizare ca in aplicatia Avocati
     var fold = function (t) { return t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ș|ş/g, 's').replace(/ț|ţ/g, 't').toLowerCase(); };
 
@@ -556,34 +578,60 @@
     function link(text, q) { var a = el('a', '', text); a.href = BAZA + (q ? '?q=' + encodeURIComponent(q) : ''); a.target = '_blank'; a.rel = 'noopener'; return a; }
     function rezultate(n) { return n === 1 ? '1 rezultat' : n + (n >= 20 && (n % 100 === 0 || n % 100 >= 20) ? ' de rezultate' : ' rezultate'); }
 
+    function randuri() { return rez.querySelectorAll('a'); }
+    function alege(i) {
+      var r = randuri();
+      if (!r.length) { ales = -1; return; }
+      ales = (i + r.length) % r.length;
+      r.forEach(function (a, k) { a.classList.toggle('ales', k === ales); });
+    }
+    function deschide(da) {
+      panou.hidden = !da;
+      form.classList.toggle('deschis', da);
+      input.setAttribute('aria-expanded', da ? 'true' : 'false');
+    }
+    function mesaj(text, legatura) {
+      var li = el('li', 'av-mesaj', text);
+      if (legatura) { li.appendChild(document.createTextNode(' ')); li.appendChild(legatura); }
+      rez.appendChild(li);
+    }
+
     function afiseaza() {
-      var q = input.value;
-      rez.textContent = ''; info.textContent = '';
-      if (!q.trim()) return;
+      var q = input.value, t = q.trim();
+      form.classList.toggle('are-text', !!q);
+      sterge.hidden = !q;
+      rez.textContent = ''; subsol.textContent = ''; numar.textContent = ''; ales = -1;
+      if (!t) { deschide(false); return; }
+      deschide(true);
       if (!date) {
-        info.textContent = 'Se încarcă lista…';
+        mesaj('Se încarcă lista…');
         incarca().then(afiseaza, function () {
-          if (!input.value.trim()) return;
-          info.textContent = 'Lista nu s-a putut încărca. ';
-          info.appendChild(link('Caută direct în Avocați', input.value.trim()));
+          if (input.value.trim() !== t) return;
+          rez.textContent = '';
+          mesaj('Lista nu s-a putut încărca.', link('Caută direct în Avocați →', t));
         });
         return;
       }
       var r = cauta(q);
-      if (!r.length) { info.textContent = 'Niciun avocat cu acest nume în lista MJ.'; return; }
-      r.slice(0, 5).forEach(function (a) {
-        var l = link('', a[0]), li = el('li');
-        l.appendChild(el('span', 'av-nume', a[0]));
-        l.appendChild(el('span', 'av-st ' + a[3], (ETICHETE[a[3]] || a[3]) + (a[4] && a[3] !== 'activ' ? ' din ' + a[4] : '')));
+      if (!r.length) {
+        mesaj('Niciun avocat cu acest nume în lista MJ.');
+        subsol.appendChild(el('span', '', 'Verifică ortografia sau caută doar numele de familie.'));
+        return;
+      }
+      numar.textContent = rezultate(r.length);
+      r.slice(0, MAX).forEach(function (a) {
+        var l = link('', a[0]), li = el('li'), linie = el('span', 'av-linie'), sageata = el('span', 'av-sageata', '↗');
+        linie.appendChild(el('span', 'av-nume', a[0]));
+        linie.appendChild(el('span', 'av-st ' + a[3], (ETICHETE[a[3]] || a[3]) + (a[4] && a[3] !== 'activ' ? ' din ' + a[4] : '')));
+        sageata.setAttribute('aria-hidden', 'true');
+        l.appendChild(linie);
         l.appendChild(el('span', 'av-meta', 'Licența nr. ' + a[1] + (a[2] ? ' · Baroul ' + a[2] : '')));
+        l.appendChild(sageata);
         li.appendChild(l); rez.appendChild(li);
       });
-      if (r.length > 5) {
-        info.textContent = 'Primele 5 din ' + rezultate(r.length) + '. ';
-        info.appendChild(link('Vezi toate în Avocați', q.trim()));
-      } else {
-        info.textContent = rezultate(r.length) + ' · lista MJ actualizată la ' + (date.actualizata_la || '—');
-      }
+      alege(0);
+      subsol.appendChild(el('span', 'av-indiciu', (r.length > MAX ? 'Se văd primele ' + MAX + ' · ' : '') + '↑ ↓ pentru a alege, Enter deschide'));
+      subsol.appendChild(link(r.length > MAX ? 'Vezi toate cele ' + r.length + ' în Avocați →' : 'Deschide în Avocați →', t));
     }
 
     function arataData(d) {
@@ -596,9 +644,25 @@
 
     // lista se descarca imediat ce pagina e gata (sau la primul focus, daca e mai devreme)
     (window.requestIdleCallback || function (f) { setTimeout(f, 300); })(function () { incarca().catch(function () {}); });
-    input.addEventListener('focus', function () { incarca().catch(function () {}); });
+    input.addEventListener('focus', function () { incarca().catch(function () {}); if (input.value.trim()) afiseaza(); });
     input.addEventListener('input', afiseaza);
-    input.addEventListener('keydown', function (e) { if (e.key === 'Escape' && input.value) { input.value = ''; afiseaza(); } });
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { if (input.value) { e.preventDefault(); input.value = ''; afiseaza(); } return; }
+      if (panou.hidden) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); alege(ales + 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); alege(ales - 1); }
+      else if (e.key === 'Enter') { var r = randuri(); if (ales >= 0 && r[ales]) { e.preventDefault(); r[ales].click(); } }
+    });
+    sterge.addEventListener('click', function () { input.value = ''; afiseaza(); input.focus(); });
+    rez.addEventListener('mousemove', function (e) {
+      var a = e.target.closest('a'); if (!a) return;
+      var i = Array.prototype.indexOf.call(randuri(), a);
+      if (i !== ales) alege(i);
+    });
+    // un click in panou nu scoate focusul din camp; linkurile se deschid normal
+    panou.addEventListener('mousedown', function (e) { e.preventDefault(); });
+    // panoul se inchide cand focusul iese din cautare (Tab, click in alta parte)
+    form.addEventListener('focusout', function (e) { if (!form.contains(e.relatedTarget)) deschide(false); });
   })();
 </script>
 </body>
